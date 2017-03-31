@@ -20,8 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/user_pic"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="80dp"
         android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
         />
     <TextView
         android:id="@+id/user_location"
@@ -32,7 +34,9 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/user_pic"
         android:layout_below="@id/user_username"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="80dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         />
     <TextView
         android:id="@+id/user_status"

@@ -14,6 +14,7 @@
     <dimen name="button_font">15dp</dimen>
     <dimen name="button_height">45dp</dimen>
     <dimen name="image_button_size">75dp</dimen>
+    <dimen name="text_width">105dp</dimen>
     <dimen name="layout_height">90dp</dimen>
     <dimen name="init_image">180dp</dimen>
     <dimen name="settings_image">320dp</dimen>

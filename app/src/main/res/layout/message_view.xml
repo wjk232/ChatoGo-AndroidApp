@@ -24,8 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="30dp"
             android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
             />
         <TextView
             android:id="@+id/message"
@@ -36,6 +37,7 @@
             android:layout_below="@+id/message_username"
             android:layout_marginRight="30dp"
             android:maxLines="1"
+            android:ellipsize="end"
             />
         <TextView
             android:layout_width="match_parent"
