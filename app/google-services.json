@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "569789639205",
+    "firebase_url": "https://fir-chatogo.firebaseio.com",
+    "project_id": "firebase-chatogo",
+    "storage_bucket": "firebase-chatogo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569789639205:android:30910d974155ea9f",
+        "android_client_info": {
+          "package_name": "com.cyr.chatogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "569789639205-hl8okhsshj9b8corq77rtuoveh598qnk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cyr.chatogo",
+            "certificate_hash": "4f31b4f977b876f50e0122b5b50d694fc46b6393"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpyAO2CyniVhgRfTed2Knz3ijlyLmYDck"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

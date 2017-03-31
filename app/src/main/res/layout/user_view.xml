@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/button_height">
+
+    <ImageView
+        android:id="@+id/user_pic"
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
+        android:src="@drawable/contacts"
+        android:scaleType="fitCenter"
+        android:layout_marginRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+
+        />
+    <TextView
+        android:id="@+id/user_username"
+        android:textSize="@dimen/normal_font"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/user_pic"
+        android:layout_marginRight="30dp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/user_location"
+        android:text="San Antonio"
+        android:textSize="@dimen/normal_font"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/user_pic"
+        android:layout_below="@id/user_username"
+        android:layout_marginRight="30dp"
+        />
+    <TextView
+        android:id="@+id/user_status"
+        android:text="offline"
+        android:textSize="@dimen/normal_font"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">ChatoGo</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_contacts">Contacts</string>
+    <string name="action_logout">Logout</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_location">Location</string>
+    <string name="prompt_location_ex">Location: San Antonio,Texas</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_username">Username</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_login">Login</string>
+    <string name="action_register">Register</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="local_chat_name">Near Me</string>
+    <string name="state_chat_name">State</string>
+    <string name="message_hint">Write Message</string>
+    <string name="location_hint">San Antonio,Texas</string>
+    <string name="title_activity_main">Near Me</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="title_activity_settings">Profile</string>
+    <string name="title_activity_contacts">Users</string>
+    <string name="title_activity_authentication">ChatoGo</string>
+    <string name="title_activity_message">Message</string>
+</resources>
