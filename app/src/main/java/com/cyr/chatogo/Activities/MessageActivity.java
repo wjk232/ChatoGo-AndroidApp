@@ -110,11 +110,13 @@ public class MessageActivity extends AppCompatActivity implements ServerAPI.User
      * @param view
      */
     public void onMessageSend(View view){
-        message = msgText.getText().toString();
-        msgText.setText("");
-        if(userInfo != null && dataBaseHandler.getUser(userInfo.getUsername()) == null)
-            dataBaseHandler.addUser(userInfo);
-        serverApi.sendMessageToUser(message,username);
+        if((message = msgText.getText().toString()).trim().length() > 0) {
+            System.out.println(msgText.getText().toString().length() + "  ");
+            msgText.setText("");
+            if (userInfo != null && dataBaseHandler.getUser(userInfo.getUsername()) == null)
+                dataBaseHandler.addUser(userInfo);
+            serverApi.sendMessageToUser(message, username);
+        }
     }
 
     /**
