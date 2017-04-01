@@ -25,6 +25,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -136,7 +139,12 @@ public class ServerAPI {
      */
     public void getUserInfo(final String option, String username){
         if(usefulFunctions.isDeviceOnline()) {
-            String url = makeURL("api","users", username + "?api_token=" + prefs.getString("token", ""));
+            String url = null;
+            try {
+                url = makeURL("api","users", URLEncoder.encode(username,"utf-8") + "?api_token=" + prefs.getString("token", ""));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -181,7 +189,13 @@ public class ServerAPI {
      */
     public void notifyUsers(){
         if(usefulFunctions.isDeviceOnline()) {
-            String url = makeURL("api","firebase","notify" + "?api_token=" + prefs.getString("token", "") +"&username="+prefs.getString("signin",""));
+            String url = null;
+            try {
+                url = makeURL("api","firebase","notify" + "?api_token=" + prefs.getString("token", "")
+                        +"&username="+ URLEncoder.encode(prefs.getString("signin",""),"utf-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
 
             JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
@@ -253,9 +267,14 @@ public class ServerAPI {
      */
     public void getChatroomMessages(){
         if(usefulFunctions.isDeviceOnline()) {
-            String url = makeURL("api","messages", getChatroom() + "?api_token=" + prefs.getString("token", "")
-                    + "&clientID=" + FirebaseInstanceId.getInstance().getToken() + "&username=" + prefs.getString("signin", ""))
-                    + "&location=" + dataBaseHandler.getUser(prefs.getString("signin", "")).getLocation();
+            String url = null;
+            try {
+                url = makeURL("api","messages", getChatroom() + "?api_token=" + prefs.getString("token", "")
+                        + "&clientID=" + FirebaseInstanceId.getInstance().getToken() + "&username=" + URLEncoder.encode(prefs.getString("signin", ""),"utf-8")
+                        + "&location=" + dataBaseHandler.getUser(prefs.getString("signin", "")).getLocation());
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -305,8 +324,8 @@ public class ServerAPI {
             try {
                 JSONObject json = new JSONObject();
                 String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-                json.put("username", username);
-                json.put("password", password);
+                json.put("username", Base64.encodeToString(username.getBytes(),Base64.DEFAULT));
+                json.put("password", Base64.encodeToString(password.getBytes(),Base64.DEFAULT));
                 json.put("profile_pic",image);
                 json.put("location", location);
                 json.put("clientID", refreshedToken);
@@ -358,7 +377,12 @@ public class ServerAPI {
                 json.put("api_token", prefs.getString("token", ""));
                 json.put("profile_pic", image);
                 json.put("location", location);
-                String url = makeURL("api","users", prefs.getString("signin",""));
+                String url = null;
+                try {
+                    url = makeURL("api","users", URLEncoder.encode(prefs.getString("signin",""),"utf-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.PUT, url, json, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -437,8 +461,8 @@ public class ServerAPI {
             try {
                 JSONObject json = new JSONObject();
                 String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-                json.put("username", username);
-                json.put("password", password);
+                json.put("username", Base64.encodeToString(username.getBytes(),Base64.DEFAULT));
+                json.put("password", Base64.encodeToString(password.getBytes(),Base64.DEFAULT));
                 json.put("clientID", refreshedToken);
                 String url = makeURL("api","login");
                 JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
@@ -486,8 +510,8 @@ public class ServerAPI {
                 JSONObject json = new JSONObject();
                 json.put("api_token", prefs.getString("token", ""));
                 json.put("chatname", chatroom);
-                json.put("username", prefs.getString("signin", ""));
-                json.put("message", message);
+                json.put("username", Base64.encodeToString(prefs.getString("signin", "").getBytes(),Base64.DEFAULT));
+                json.put("message", Base64.encodeToString(message.getBytes(),Base64.DEFAULT));
                 json.put("location", dataBaseHandler.getUser(prefs.getString("signin", "")).getLocation());
                 String url = makeURL("api","firebase","messagechatroom");
 
@@ -520,16 +544,16 @@ public class ServerAPI {
      * Send Message Request:
      * Send messages to users
      * @param message
-     * @param username
+     * @param usernameTo
      */
-    public void sendMessageToUser(final String message, String username){
+    public void sendMessageToUser(final String message, String usernameTo){
         if(usefulFunctions.isDeviceOnline()) {
             try {
                 JSONObject json = new JSONObject();
                 json.put("api_token", prefs.getString("token", ""));
-                json.put("username", prefs.getString("signin", "guest"));
-                json.put("usernameTo", username);
-                json.put("message", message);
+                json.put("username", Base64.encodeToString(prefs.getString("signin", "guest").getBytes(),Base64.DEFAULT));
+                json.put("usernameTo", Base64.encodeToString(usernameTo.getBytes(),Base64.DEFAULT));
+                json.put("message", Base64.encodeToString(message.getBytes(),Base64.DEFAULT));
                 String url = makeURL("api","firebase","messageuser");
                 JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
                     @Override
@@ -565,7 +589,12 @@ public class ServerAPI {
      */
     public void logout(){
         if(usefulFunctions.isDeviceOnline()) {
-            String url = makeURL("api","logout?username=" + prefs.getString("signin","") + "&api_token=" + prefs.getString("token", ""));
+            String url = null;
+            try {
+                url = makeURL("api","logout?username=" + URLEncoder.encode(prefs.getString("signin",""),"utf-8") + "&api_token=" + prefs.getString("token", ""));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
