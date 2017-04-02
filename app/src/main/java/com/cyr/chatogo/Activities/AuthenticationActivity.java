@@ -167,6 +167,10 @@ public class AuthenticationActivity extends AppCompatActivity implements ServerA
             toast.setText("Location is required");
             toast.show();
             return false;
+        }else if(option.equals("register") && usernameEditView.getText().toString().contains(" ")) {
+            toast.setText("Username must not contain spaces");
+            toast.show();
+            return false;
         }else
             return true;
     }

@@ -324,8 +324,8 @@ public class ServerAPI {
             try {
                 JSONObject json = new JSONObject();
                 String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-                json.put("username", Base64.encodeToString(username.getBytes(),Base64.DEFAULT));
-                json.put("password", Base64.encodeToString(password.getBytes(),Base64.DEFAULT));
+                json.put("username", username);
+                json.put("password", password);
                 json.put("profile_pic",image);
                 json.put("location", location);
                 json.put("clientID", refreshedToken);
@@ -461,8 +461,8 @@ public class ServerAPI {
             try {
                 JSONObject json = new JSONObject();
                 String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-                json.put("username", Base64.encodeToString(username.getBytes(),Base64.DEFAULT));
-                json.put("password", Base64.encodeToString(password.getBytes(),Base64.DEFAULT));
+                json.put("username", username);
+                json.put("password", password);
                 json.put("clientID", refreshedToken);
                 String url = makeURL("api","login");
                 JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
@@ -510,8 +510,8 @@ public class ServerAPI {
                 JSONObject json = new JSONObject();
                 json.put("api_token", prefs.getString("token", ""));
                 json.put("chatname", chatroom);
-                json.put("username", Base64.encodeToString(prefs.getString("signin", "").getBytes(),Base64.DEFAULT));
-                json.put("message", Base64.encodeToString(message.getBytes(),Base64.DEFAULT));
+                json.put("username", prefs.getString("signin", ""));
+                json.put("message", message);
                 json.put("location", dataBaseHandler.getUser(prefs.getString("signin", "")).getLocation());
                 String url = makeURL("api","firebase","messagechatroom");
 
@@ -551,9 +551,9 @@ public class ServerAPI {
             try {
                 JSONObject json = new JSONObject();
                 json.put("api_token", prefs.getString("token", ""));
-                json.put("username", Base64.encodeToString(prefs.getString("signin", "guest").getBytes(),Base64.DEFAULT));
-                json.put("usernameTo", Base64.encodeToString(usernameTo.getBytes(),Base64.DEFAULT));
-                json.put("message", Base64.encodeToString(message.getBytes(),Base64.DEFAULT));
+                json.put("username", prefs.getString("signin", "guest"));
+                json.put("usernameTo", usernameTo);
+                json.put("message", message);
                 String url = makeURL("api","firebase","messageuser");
                 JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
                     @Override
