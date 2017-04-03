@@ -56,10 +56,9 @@ public class ServerAPI {
     private Toast toast;
     private static ServerAPI ourInstance;
     private SharedPreferences prefs;
-    private SharedPreferences.Editor editor;
-    RequestQueue requestQueue;
-    ArrayList<Message> messages;
-    ArrayList<User> users;
+    private RequestQueue requestQueue;
+    private ArrayList<Message> messages;
+    private ArrayList<User> users;
 
     private String makeURL(String... args){
         return "http://192.241.128.43/"+ TextUtils.join("/",args);
@@ -77,7 +76,6 @@ public class ServerAPI {
         //Initialize variables
         this.context = context;
         prefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
-        editor = prefs.edit();
         requestQueue = Volley.newRequestQueue(context);
         requestQueue.start();
         messages = new ArrayList<>();
@@ -91,7 +89,7 @@ public class ServerAPI {
         if(this.toast == null)
             this.toast = Toast.makeText(context,"No Internet Connection!",Toast.LENGTH_SHORT);
     }
-    public String getChatroom() {
+    private String getChatroom() {
         return prefs.getString("chatroom","nearme");
     }
 
@@ -712,67 +710,5 @@ public class ServerAPI {
      */
     public interface AdrressCallback {
         void onAddressReceived(int code, String location, String message);
-    }
-
-    //Encrypt message
-    public byte[] Encrypt(String password, String publicKey) {
-        try {
-
-            byte[] bytePublicKey = Base64.decode(publicKey,Base64.DEFAULT);
-            X509EncodedKeySpec X509publicKey = new X509EncodedKeySpec(bytePublicKey);
-            KeyFactory keySpec = KeyFactory.getInstance("RSA");
-            PublicKey publicKeyN = keySpec.generatePublic(X509publicKey);
-            Cipher cipher = Cipher.getInstance("RSA");
-            cipher.init(Cipher.DECRYPT_MODE, publicKeyN);
-            return cipher.doFinal(password.getBytes());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    //Decrypt message
-    public String Decrypt(String password, String privateKey){
-        try {
-            byte[] bytesMessage = Base64.decode(password,Base64.DEFAULT);
-            byte[] bytePrivateKey = Base64.decode(privateKey,Base64.DEFAULT);
-            PKCS8EncodedKeySpec X509privateKey = new PKCS8EncodedKeySpec(bytePrivateKey);
-            KeyFactory keySpec = KeyFactory.getInstance("RSA");
-            PrivateKey privateKeyN = keySpec.generatePrivate(X509privateKey);
-            Cipher cipher = Cipher.getInstance("RSA");
-            cipher.init(Cipher.ENCRYPT_MODE,privateKeyN);
-            return new String (cipher.doFinal(bytesMessage)) ;
-            //return cipher.doFinal(message.getBytes());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    //get public and private encode string
-    public KeyPair keypairGen() {
-        SecureRandom random = new SecureRandom();
-        KeyPair keyPair = null;
-        try {
-            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-            keyGen.initialize(2048,random);            // initialize key generator
-            keyPair = keyGen.generateKeyPair(); // generate pair of keys
-
-        } catch (Exception e) {
-            System.out.println("KeyGen Error");
-        }
-        return keyPair;
-    }
-
-    //keys convert to string
-    public String convertKey(PublicKey publickey, PrivateKey privateKey){
-        String keystring;
-        if(publickey != null)
-            keystring = Base64.encodeToString(publickey.getEncoded(),Base64.DEFAULT);
-        else
-            keystring = Base64.encodeToString(privateKey.getEncoded(),Base64.DEFAULT);
-        return keystring;
     }
 }

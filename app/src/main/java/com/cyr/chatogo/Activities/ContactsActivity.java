@@ -128,7 +128,7 @@ public class ContactsActivity extends AppCompatActivity implements ServerAPI.Use
                     }
 
                     //image and text for each file
-                    final TextView statusTextView = (TextView) rowView.findViewById(R.id.user_status);
+                    //final TextView statusTextView = (TextView) rowView.findViewById(R.id.user_status);
                     final TextView usernameTextView = (TextView) rowView.findViewById(R.id.user_username);
                     final TextView locationTextView = (TextView) rowView.findViewById(R.id.user_location);
                     final ImageView imageView = (ImageView)rowView.findViewById(R.id.user_pic);
@@ -137,7 +137,7 @@ public class ContactsActivity extends AppCompatActivity implements ServerAPI.Use
                         imageView.setImageBitmap(UsefulFunctions.ourInstance(context).stringToBitmap(getItem(position).getImage()));
                     locationTextView.setText(getItem(position).getLocation());
                     usernameTextView.setText(getItem(position).getUsername());
-                    statusTextView.setText(getItem(position).getStatus());
+                    //statusTextView.setText(getItem(position).getStatus());
 
                     return rowView;
                 }

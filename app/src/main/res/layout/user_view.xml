@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/user_pic"
-        android:layout_marginRight="80dp"
+        android:layout_marginRight="10dp"
         android:textStyle="bold"
         android:maxLines="1"
         android:ellipsize="end"
@@ -34,19 +34,19 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/user_pic"
         android:layout_below="@id/user_username"
-        android:layout_marginRight="80dp"
+        android:layout_marginRight="10dp"
         android:maxLines="1"
         android:ellipsize="end"
         />
-    <TextView
-        android:id="@+id/user_status"
-        android:text="offline"
-        android:textSize="@dimen/normal_font"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        />
+    <!--<TextView-->
+        <!--android:id="@+id/user_status"-->
+        <!--android:text="offline"-->
+        <!--android:textSize="@dimen/normal_font"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginRight="30dp"-->
+        <!--/>-->
 
 </RelativeLayout>
