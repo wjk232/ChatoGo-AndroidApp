@@ -152,11 +152,9 @@ public class MessageActivity extends AppCompatActivity implements ServerAPI.User
     /**
      * Firebase listener when user
      * has replied
-     * @param message
      */
     @Override
-    public void onUserMsgReplied(Message message) {
-        dataBaseHandler.addMessage(message);
+    public void onUserMsgReplied() {
         rx.Observable.just(0)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())

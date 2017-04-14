@@ -672,11 +672,9 @@ public class ServerAPI {
      * @param message
      */
     public void onReplied(Message message){
-        if(userInfoCallback != null) {
-            userInfoCallback.onUserMsgReplied(message);
-        }else{
-            dataBaseHandler.addMessage(message);
-        }
+        dataBaseHandler.addMessage(message);
+        if(userInfoCallback != null)
+            userInfoCallback.onUserMsgReplied();
     }
 
     /**
@@ -688,7 +686,7 @@ public class ServerAPI {
 
     public interface UserInfoCallback{
         void onUserInfo(User userInfo);
-        void onUserMsgReplied(Message message);
+        void onUserMsgReplied();
         void onNotifyMsgSend(int code, String content);
     }
 

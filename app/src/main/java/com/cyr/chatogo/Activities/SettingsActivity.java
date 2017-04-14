@@ -105,8 +105,13 @@ public class SettingsActivity extends AppCompatActivity implements ServerAPI.Use
      * @param view
      */
     public void onLocationChange(View view){
-        if(!locationEditView.getText().toString().contains(user.getLocation()))
-            serverApi.getAddress(locationEditView.getText().toString());
+        if(!locationEditView.getText().toString().contains(user.getLocation())) {
+            String []locationparse = locationEditView.getText().toString().split(" ");
+            String location = "";
+            for(int i = 0;i < locationparse.length;i++)
+                location += locationparse[i] + "+";
+            serverApi.getAddress(location);
+        }
     }
 
     /**
@@ -185,6 +190,7 @@ public class SettingsActivity extends AppCompatActivity implements ServerAPI.Use
     public void onUsersProfileUpdate(int code, String message) {
         Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
         if(code == 200){
+            locationEditView.setText("");
             serverApi.notifyUsers();
             displayData();
         }else{
